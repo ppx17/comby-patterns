@@ -1,0 +1,25 @@
+[null-coalesce]
+match=':[[in]] === undefined ? :[[default]] : :[[in]];'
+rewrite=':[in] ?? :[default]'
+
+[null-coalesce-2]
+match=':[[in]] !== undefined ? :[[in]] : :[[default]];'
+rewrite=':[in] ?? :[default]'
+
+[useless-closure]
+match='(() => :[[method]]())'
+rewrite='(:[method])'
+
+[useless-closure-2]
+match=':[[label]]: () => :[[method]](),'
+rewrite=':[label]: :[method],'
+
+#[single-line-if]
+#match=':[ w]if (:[test]) :[expression\n]'
+#rewrite='''
+#:[w]if (:[test]) {
+#:[w]  :[expression]:[w]}
+#'''
+#rule='where :[expression] != "{\n"'
+
+

@@ -1,0 +1,15 @@
+[replace_interpolation_with_hcl_expression]
+match='"${:[symbol.]}"'
+rewrite=':[symbol]'
+
+[use_splat_expression]
+match='[for :[[tmp]] in :[input.] : :[tmp].:[prop]]'
+rewrite=':[input][*].:[prop]'
+
+[use_splat_to_convert_null_to_empty_list]
+match = 'for_each = :[input.] == null ? [] : :[input.]'
+rewrite = 'for_each = :[input][*]'
+
+[upgrade_old_splat_syntax]
+match = ':[symbol.].*'
+rewrite = ':[symbol][*]'
